@@ -461,7 +461,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <h3>Paintings Portal (ArtCart)</h3>
         <p class="desc">An online art store where people browse paintings by style, sign in, fill a cart and check out, with their order history saved.</p>
       </div>
-      <span class="more">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+      <span class="more">View details &amp; watch the demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
     </button>
   </div>
 
@@ -563,7 +563,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div id="dlgSections" class="dlg-sections"></div>
     <blockquote id="dlgQuote" class="dlg-quote" hidden></blockquote>
     <div class="tags" id="dlgTags"></div>
-    <div id="dlgLink"></div>
+    <div id="dlgLink" class="actions"></div>
     <div id="dlgEmbed" class="embed-wrap" hidden></div>
   </div>
 </dialog>
@@ -747,7 +747,9 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         'Database designed in Supabase (PostgreSQL) with tables for users, paintings, genres, orders and logins.',
         'Reusable header, menu and footer parts keep the PHP code clean.'
       ],
-      tags: ['PHP', 'PostgreSQL', 'Supabase', 'Replit'], link: REPO
+      tags: ['PHP', 'PostgreSQL', 'Supabase', 'Replit'], link: REPO,
+      link2: { href: 'https://www.linkedin.com/feed/update/urn:li:activity:7529028530026831873/', text: 'Open the post on LinkedIn' },
+      embed: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7529028464616615936'
     },
     records: {
       meta: 'Databases & SQL', title: 'Student Records Management Database',
@@ -838,6 +840,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     if (d.link) {
       var a = document.createElement('a'); a.className = 'btn'; a.href = d.link.href; a.textContent = d.link.text;
       lk.appendChild(a);
+    }
+    if (d.link2) {
+      var a2 = document.createElement('a'); a2.className = 'btn ghost'; a2.href = d.link2.href; a2.textContent = d.link2.text;
+      lk.appendChild(a2);
     }
     var em = document.getElementById('dlgEmbed'); em.textContent = '';
     if (d.embed) {
