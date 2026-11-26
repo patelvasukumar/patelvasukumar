@@ -299,6 +299,18 @@ dialog::backdrop { background: rgba(11, 13, 16, 0.55); backdrop-filter: blur(4px
 .embed-wrap[hidden] { display: none; }
 .embed-wrap iframe { width: 100%; max-width: 560px; height: 720px; border: 0; border-radius: 12px; background: #fff; }
 @media (max-width: 580px) { .embed-wrap { padding: 8px; } .embed-wrap iframe { height: 640px; } }
+.embed-wrap { flex-direction: column; align-items: center; gap: 14px; }
+.embed-item { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.embed-item h4 { margin: 0; align-self: flex-start; font-family: var(--font-display); font-size: 17px; }
+.others-toggle { display: inline-flex; align-items: center; gap: 8px; margin: 14px 4px 0; padding: 9px 14px 9px 16px; border: 0; border-radius: 999px; background: var(--tile); color: var(--text); font-weight: 600; font-size: 14.5px; cursor: pointer; transition: background-color 200ms ease; }
+.others-toggle:hover { background: var(--tile-soft); }
+.others-toggle[aria-expanded="true"] { background: var(--strong); color: var(--on-strong); }
+.others-toggle svg { width: 16px; height: 16px; transition: transform 300ms cubic-bezier(.2,.8,.2,1); }
+.others-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.others-count { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: 12.5px; }
+.others-panel { margin-top: 14px; }
+@media (min-width: 921px) { .others-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.others-panel[hidden] { display: none; }
 .group-title { margin: 28px 4px 14px; font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; color: var(--muted); }
 .project.accent .label, .project.accent .more { color: var(--on-accent); }
 .dlg .tags { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -433,7 +445,43 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <section class="view" id="view-projects" aria-label="Projects" hidden>
   <div class="section-head"><h2>Projects</h2></div>
 
-  <h3 class="group-title">Embedded Systems &amp; Assembly Language</h3>
+  <h3 class="group-title">Embedded Systems</h3>
+  <div class="bento">
+    <button class="tile strong project c4" type="button" data-project="janus" style="min-height: 300px">
+      <div class="project-top"><span class="label">IoT · 2× Arduino MEGA · Bluetooth · Node-RED</span><span class="badge">New · 2 videos</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3>Project Janus: IoT Smart Room Monitoring &amp; Control</h3>
+        <p class="desc" style="max-width: 66ch">A room that knows when you walk in, cools itself down, stops the fan before your hand reaches the blade, and can be controlled from your phone or a live Wi-Fi dashboard.</p>
+      </div>
+      <span class="more">View details &amp; watch both videos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+  </div>
+  <button class="others-toggle" type="button" id="othersToggle" aria-expanded="false" aria-controls="othersPanel">
+    Others <span class="others-count">3</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+  </button>
+  <div class="bento others-panel" id="othersPanel" hidden>
+    <button class="tile project" type="button" data-project="p7">
+      <span class="label">Arduino · Project 7 · Video</span>
+      <h3>Sensors &amp; Buzzers</h3>
+      <p class="desc">Light, distance and motion sensors driving buzzers, including a proximity alarm.</p>
+      <span class="more">Details &amp; video <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+    <button class="tile project" type="button" data-project="p6">
+      <span class="label">Arduino · Project 6 · Video</span>
+      <h3>Temperature &amp; Humidity</h3>
+      <p class="desc">DHT11 and NTC thermistor readings shown live on an LCD and 7-segment display.</p>
+      <span class="more">Details &amp; video <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+    <button class="tile project" type="button" data-project="p5">
+      <span class="label">Arduino · Project 5 · Video</span>
+      <h3>Displays with Shift Registers</h3>
+      <p class="desc">Four programs on one circuit, using shift registers and 7-segment displays.</p>
+      <span class="more">Details &amp; video <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+  </div>
+
+  <h3 class="group-title">Assembly Language</h3>
   <div class="bento">
     <button class="tile strong project c2" type="button" data-project="checksum">
       <span class="label">HCS12 Assembly · Dragon12-Plus</span>
@@ -737,6 +785,78 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   var REPO = { href: 'https://github.com/patelvasukumar/SharedFolder', text: 'View the code on GitHub' };
   var LI = { href: 'https://www.linkedin.com/in/vasukumar-patel/recent-activity/all/', text: 'View on LinkedIn' };
   var DATA = {
+    janus: {
+      meta: 'Embedded Systems · IoT · Team project with Phuong Lam Tran', title: 'Project Janus: IoT Smart Room Monitoring & Control System',
+      desc: 'Named after Janus, the Roman god with two faces: one Arduino MEGA faces the user and the other faces the room, sharing the work over I2C. Bluetooth and Wi-Fi are the doors that let a phone and a dashboard reach it.',
+      sections: [
+        { title: 'What it does', items: [
+          'Phone control over Bluetooth (HC-08): START, STOP, STATUS, SetTemperature and SetPassword.',
+          'A Node-RED dashboard on Wi-Fi shows live temperature, humidity, fan status and alerts in any browser.',
+          'The temperature setpoint changes live from the phone or dashboard, with no restart.',
+          'A passcode saved in EEPROM that survives a power cut.'
+        ] },
+        { title: 'Real-life safety & smart-building ideas', items: [
+          'The fan runs only when the PIR sensor detects someone in the room.',
+          'An ultrasonic safety stop under 20 cm, restarting above 22 cm (hysteresis, like a thermostat).',
+          'Night mode lowers the temperature automatically.',
+          'A 5-second fail-safe shuts the fan off if a board stops responding.'
+        ] },
+        { title: 'Inside the hardware & software', items: [
+          'Fan driven through an L293D motor driver on its own 9V supply, with a common ground.',
+          'Four night-mode LEDs on one pin, with resistors calculated to keep current safe.',
+          'State machine and interrupts, a 1 kHz timer for steady displays, and millis() so nothing freezes.',
+          'SoftwareSerial adds a second serial port, so the phone and laptop work at the same time.',
+          'Fits in 8 KB of RAM: fixed-size data types, text in Flash, live data in SRAM, settings in EEPROM.'
+        ] }
+      ],
+      quote: 'Real systems are not just about features. They need safe power, clear communication and a plan for when something fails.',
+      tags: ['Arduino MEGA', 'I2C', 'Bluetooth', 'Node-RED', 'IoT', 'EEPROM'], link: REPO,
+      links: [
+        { href: 'https://www.linkedin.com/feed/update/urn:li:activity:7531556398535712768/', text: 'Part 1 on LinkedIn' },
+        { href: 'https://www.linkedin.com/feed/update/urn:li:activity:7531566650865725441/', text: 'Part 2 on LinkedIn' }
+      ],
+      embeds: [
+        { label: 'Part 1: Full system demo', src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7531555992266973184' },
+        { label: 'Part 2: Inside the hardware & software', src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7531566370413649920' }
+      ]
+    },
+    p7: {
+      meta: 'Embedded Systems · Arduino', title: 'Project 7: Sensors & Buzzers',
+      desc: 'Connecting sensors and output devices to an Arduino Mega.',
+      points: [
+        'Photoresistor (LDR) readings shown on the Serial Monitor.',
+        'Active and passive buzzers controlled by push buttons.',
+        'HC-SR04 ultrasonic sensor with a proximity alert that beeps faster as objects get closer.',
+        'HC-SR501 PIR motion sensor that lights an LED, sounds a buzzer and counts motion events.'
+      ],
+      tags: ['Arduino Mega', 'Ultrasonic', 'PIR', 'Buzzers'], link: REPO,
+      link2: { href: 'https://www.linkedin.com/feed/update/urn:li:activity:7521660464125358081/', text: 'Open the post on LinkedIn' },
+      embed: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7521660348526075904'
+    },
+    p6: {
+      meta: 'Embedded Systems · Arduino', title: 'Project 6: Temperature & Humidity Sensors',
+      desc: 'Measuring temperature and humidity with an Arduino Mega and showing the readings in real time.',
+      points: [
+        'Used a DHT11 digital sensor and an NTC thermistor with the Steinhart–Hart equation.',
+        'Showed readings on an LCD and a 7-segment display, with smoothing for stable values.',
+        'Added my own extras: a name display using interrupts, and one circuit for both parts.'
+      ],
+      tags: ['Arduino Mega', 'DHT11', 'Thermistor', 'LCD'], link: REPO,
+      link2: { href: 'https://www.linkedin.com/feed/update/urn:li:activity:7518839883671527424/', text: 'Open the post on LinkedIn' },
+      embed: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7518839827832729601'
+    },
+    p5: {
+      meta: 'Embedded Systems · Arduino', title: 'Project 5: Displays with Shift Registers',
+      desc: 'Four programs, all running on the same circuit instead of four separate builds.',
+      points: [
+        'Worked with shift registers, the SevSeg library and interrupts.',
+        'Configured resistors, shift registers, switches, LEDs and Arduino pins so one circuit served all four parts.',
+        'Troubleshot loose connections and updated pin assignments as the project grew.'
+      ],
+      tags: ['Arduino', 'Shift registers', '7-segment display'], link: REPO,
+      link2: { href: 'https://www.linkedin.com/feed/update/urn:li:activity:7516375321827414016/', text: 'Open the post on LinkedIn' },
+      embed: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7516375194207207424'
+    },
     artcart: {
       meta: 'Full-Stack Web Development', title: 'Paintings Portal (ArtCart)',
       desc: 'A full-stack online store where users can browse and buy famous paintings.',
@@ -772,7 +892,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       tags: ['Java', 'OOP'], link: REPO
     },
     checksum: {
-      meta: 'Embedded Systems · Assembly Language', title: 'Digit Checksum Calculator',
+      meta: 'Assembly Language · HCS12', title: 'Digit Checksum Calculator',
       desc: 'A checksum calculator in HCS12 assembly, running on the Dragon12-Plus microcontroller board.',
       points: [
         'Based on the Luhn algorithm, the method used to check credit card numbers.',
@@ -783,7 +903,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       tags: ['Assembly', 'HCS12', 'Microcontrollers', 'Embedded systems'], link: REPO
     },
     bcd: {
-      meta: 'Embedded Systems · Assembly Language', title: 'BCD Counter & Secret Message Decryption',
+      meta: 'Assembly Language · HCS12', title: 'BCD Counter & Secret Message Decryption',
       desc: 'Two assembly programs for the HCS12 microcontroller on the Dragon12 board.',
       points: [
         'A BCD counter from 00 to 15 on the 7-segment displays, using DAA to keep the count in valid BCD.',
@@ -841,17 +961,23 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       var a = document.createElement('a'); a.className = 'btn'; a.href = d.link.href; a.textContent = d.link.text;
       lk.appendChild(a);
     }
+    (d.links || []).forEach(function (l) {
+      var x = document.createElement('a'); x.className = 'btn ghost'; x.href = l.href; x.textContent = l.text; lk.appendChild(x);
+    });
     if (d.link2) {
       var a2 = document.createElement('a'); a2.className = 'btn ghost'; a2.href = d.link2.href; a2.textContent = d.link2.text;
       lk.appendChild(a2);
     }
     var em = document.getElementById('dlgEmbed'); em.textContent = '';
-    if (d.embed) {
+    var list = d.embeds || (d.embed ? [{ label: '', src: d.embed }] : []);
+    list.forEach(function (v) {
+      var box = document.createElement('div'); box.className = 'embed-item';
+      if (v.label) { var h = document.createElement('h4'); h.textContent = v.label; box.appendChild(h); }
       var f = document.createElement('iframe');
-      f.src = d.embed; f.title = 'Video: ' + d.title; f.setAttribute('allowfullscreen', '');
-      em.appendChild(f);
-    }
-    em.hidden = !d.embed;
+      f.src = v.src; f.title = 'Video: ' + (v.label || d.title); f.setAttribute('allowfullscreen', '');
+      box.appendChild(f); em.appendChild(box);
+    });
+    em.hidden = !list.length;
   }
   projects.forEach(function (p) {
     p.addEventListener('click', function () {
@@ -864,6 +990,17 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   document.getElementById('dlgClose').addEventListener('click', closeDlg);
   dlg.addEventListener('click', function (e) { if (e.target === dlg) closeDlg(); });
   dlg.addEventListener('close', function () { var em = document.getElementById('dlgEmbed'); em.textContent = ''; em.hidden = true; if (lastBtn) lastBtn.focus(); });
+
+  /* ---------- Others toggle ---------- */
+  var ot = document.getElementById('othersToggle'), op = document.getElementById('othersPanel');
+  if (ot && op) {
+    ot.addEventListener('click', function () {
+      var open = ot.getAttribute('aria-expanded') === 'true';
+      ot.setAttribute('aria-expanded', String(!open));
+      op.hidden = open;
+      if (!open) op.querySelectorAll('.tile').forEach(function (t, n) { t.style.setProperty('--i', String(n)); });
+    });
+  }
 
   /* ---------- Copy email + toast ---------- */
   var toast = document.getElementById('toast'), toastTimer;
