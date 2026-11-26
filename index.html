@@ -258,7 +258,7 @@ a.tile:hover .arrow-circle { transform: rotate(-45deg) scale(1.08); }
 .filter-status { margin: -6px 4px 16px; font-size: 14px; color: var(--muted); min-height: 1.5em; }
 button.tile { border: 0; text-align: left; cursor: pointer; width: 100%; font: inherit; }
 .project h3 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; font-size: 26px; }
-.project.c2 h3 { font-size: clamp(28px, 3vw, 38px); }
+.project.c2 h3, .project.c4 h3 { font-size: clamp(28px, 3vw, 38px); }
 .project .desc { color: var(--muted); font-size: 15.5px; max-width: 50ch; }
 .project.strong .desc { color: var(--on-strong-muted); }
 .more { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
@@ -279,7 +279,7 @@ button.tile { border: 0; text-align: left; cursor: pointer; width: 100%; font: i
 .toast.show { transform: translate(-50%, 0); opacity: 1; visibility: visible; transition-delay: 0s; }
 
 /* Dialog */
-dialog { border: 0; padding: 0; border-radius: 28px; width: min(640px, calc(100% - 32px)); max-height: calc(100% - 48px); background: var(--tile); color: var(--text); box-shadow: 0 40px 80px -30px rgba(0,0,0,.55); }
+dialog { border: 0; padding: 0; border-radius: 28px; width: min(640px, calc(100% - 32px)); max-height: calc(100% - 48px); overflow: auto; background: var(--tile); color: var(--text); box-shadow: 0 40px 80px -30px rgba(0,0,0,.55); }
 dialog[open] { animation: pop 420ms cubic-bezier(.2,.8,.2,1); }
 dialog::backdrop { background: rgba(11, 13, 16, 0.55); backdrop-filter: blur(4px); }
 @keyframes pop { from { opacity: 0; transform: translateY(24px) scale(0.96); } }
@@ -290,6 +290,17 @@ dialog::backdrop { background: rgba(11, 13, 16, 0.55); backdrop-filter: blur(4px
 .close:hover { transform: rotate(90deg); background: var(--tile-soft); }
 .close svg { width: 18px; height: 18px; }
 .dlg ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.dlg-sections { display: grid; gap: 10px; }
+.dlg-sections:empty { display: none; }
+.dlg-sections h4 { margin: 6px 0 0; font-family: var(--font-display); font-size: 18px; letter-spacing: -0.01em; }
+.dlg-quote { margin: 4px 0 0; padding: 14px 18px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 14%, transparent); font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1.3; }
+.video-tile { justify-content: flex-start; }
+.embed-wrap { display: flex; justify-content: center; background: var(--bg); border-radius: 18px; padding: 12px; }
+.embed-wrap[hidden] { display: none; }
+.embed-wrap iframe { width: 100%; max-width: 560px; height: 720px; border: 0; border-radius: 12px; background: #fff; }
+@media (max-width: 580px) { .embed-wrap { padding: 8px; } .embed-wrap iframe { height: 640px; } }
+.group-title { margin: 28px 4px 14px; font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; color: var(--muted); }
+.project.accent .label, .project.accent .more { color: var(--on-accent); }
 .dlg .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .dlg .tags span { font-size: 13.5px; font-weight: 500; padding: 6px 12px; border-radius: 999px; background: var(--bg); }
 
@@ -315,6 +326,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <nav class="main" aria-label="Main">
       <a class="pill tab" href="#home" data-view="home">Vasu Patel</a>
       <a class="pill tab" href="#projects" data-view="projects">Projects</a>
+      <a class="pill tab" href="#posts" data-view="posts">Famous Posts</a>
       <a class="pill tab" href="#contact" data-view="contact">Contact &amp; Links</a>
       <button class="pill theme-toggle" id="themeToggle" type="button" aria-label="Switch between light and dark theme">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
@@ -379,11 +391,20 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
     <div class="tile c2">
       <span class="label">Work experience</span>
-      <div style="display: flex; align-items: center; gap: 16px">
-        <span class="arrow-circle" aria-hidden="true" style="width: 52px; height: 52px; flex: none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path></svg></span>
-        <div>
-          <div class="big" style="font-size: clamp(30px, 3.4vw, 42px); line-height: 1">Walmart</div>
-          <span class="tag">Employee of the Month · Jan 2025</span>
+      <div class="timeline">
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div>
+            <div class="tl-title">Software Engineering Intern · Backend Systems, Database &amp; Security</div>
+            <div class="sub">Advanced Biomechatronics and Locomotion Laboratory, Carleton University</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div>
+            <div class="tl-title">Freelancer · Upwork</div>
+            <div class="sub">Testing, data entry and more</div>
+          </div>
         </div>
       </div>
     </div>
@@ -411,14 +432,83 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <!-- ===== VIEW: PROJECTS ===== -->
   <section class="view" id="view-projects" aria-label="Projects" hidden>
   <div class="section-head"><h2>Projects</h2></div>
+
+  <h3 class="group-title">Embedded Systems &amp; Assembly Language</h3>
   <div class="bento">
-    <button class="tile strong project c4" type="button" data-project="irish" style="min-height: 320px">
-      <div class="project-top"><span class="label">Group lead · AI · Web · Mobile</span><span class="badge">Featured</span></div>
-      <div style="display: flex; flex-direction: column; gap: 12px">
-        <h3 style="font-size: clamp(34px, 4.4vw, 56px)">Irish: AI Resume Agent</h3>
-        <p class="desc" style="font-size: 17px; max-width: 60ch">Tailors resumes to each job posting with AI, from one code base for web, Android and iOS. Every generated resume is saved locally and to Google Cloud.</p>
+    <button class="tile strong project c2" type="button" data-project="checksum">
+      <span class="label">HCS12 Assembly · Dragon12-Plus</span>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3>Digit Checksum Calculator</h3>
+        <p class="desc">The Luhn algorithm (the one that checks credit card numbers) in assembly, shown on 7-segment displays.</p>
       </div>
       <span class="more">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+    <button class="tile project c2" type="button" data-project="bcd">
+      <span class="label">HCS12 Assembly · Dragon12</span>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3>BCD Counter &amp; Secret Message</h3>
+        <p class="desc">A 00–15 BCD counter on 7-segment displays, and a program that decrypts a hidden message in memory.</p>
+      </div>
+      <span class="more">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+  </div>
+
+  <h3 class="group-title">Full-Stack Web Development</h3>
+  <div class="bento">
+    <button class="tile strong project c4" type="button" data-project="artcart">
+      <span class="label">PHP · PostgreSQL · Supabase · Replit</span>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3>Paintings Portal (ArtCart)</h3>
+        <p class="desc">An online art store where people browse paintings by style, sign in, fill a cart and check out, with their order history saved.</p>
+      </div>
+      <span class="more">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+  </div>
+
+  <h3 class="group-title">Databases &amp; SQL</h3>
+  <div class="bento">
+    <button class="tile project c4" type="button" data-project="records">
+      <span class="label">SQL · MySQL Workbench</span>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3>Student Records Management Database</h3>
+        <p class="desc">A 13-table database for a high school's students, parents, courses, grades, test results and activities.</p>
+      </div>
+      <span class="more">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+  </div>
+
+  <h3 class="group-title">Programming &amp; Scripting</h3>
+  <div class="bento">
+    <button class="tile project c2" type="button" data-project="tax">
+      <span class="label">Java · OOP</span>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3>Tax Filing Calculator</h3>
+        <p class="desc">A Java console app that works out monthly income, tax and take-home pay for each person.</p>
+      </div>
+      <span class="more">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+    <button class="tile strong project c2" type="button" data-project="linux">
+      <span class="label">Bash · Linux · WSL</span>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3>Linux User Management Scripts</h3>
+        <p class="desc">Menu-driven Bash scripts that create, change and inspect Linux user accounts.</p>
+      </div>
+      <span class="more">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+    </button>
+  </div>
+  </section>
+
+  <!-- ===== VIEW: POSTS ===== -->
+  <section class="view" id="view-posts" aria-label="Famous Posts" hidden>
+  <div class="section-head"><h2>Famous Posts</h2></div>
+  <div class="bento">
+    <button class="tile accent project c4" type="button" data-project="post-remote" style="min-height: 300px">
+      <div class="project-top"><span class="label">How-to · Windows · Productivity</span><span class="badge" style="background: var(--on-accent); color: var(--accent)">11.8K+ views</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h3 style="font-size: clamp(30px, 3.8vw, 48px)">How to control your Windows laptop remotely, even with the lid closed</h3>
+        <p class="desc" style="color: var(--on-accent); opacity: 0.85; max-width: 64ch">How I kept working on a group assignment from my phone during breaks at my part-time job, and the four steps to set it up yourself.</p>
+      </div>
+      <span class="more">Read the post &amp; watch the video <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
     </button>
   </div>
   </section>
@@ -470,8 +560,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     </div>
     <p id="dlgDesc" style="color: var(--muted)"></p>
     <ul id="dlgList"></ul>
+    <div id="dlgSections" class="dlg-sections"></div>
+    <blockquote id="dlgQuote" class="dlg-quote" hidden></blockquote>
     <div class="tags" id="dlgTags"></div>
     <div id="dlgLink"></div>
+    <div id="dlgEmbed" class="embed-wrap" hidden></div>
   </div>
 </dialog>
 
@@ -574,7 +667,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   }
 
   /* ---------- Tabs: show one view at a time ---------- */
-  var VIEWS = ['home', 'projects', 'contact'];
+  var VIEWS = ['home', 'projects', 'posts', 'contact'];
   var tabs = document.querySelectorAll('.tab');
   var countUp = runGpa;
   function showView(name) {
@@ -641,18 +734,85 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   var projects = document.querySelectorAll('.project');
 
   /* ---------- Project details dialog ---------- */
+  var REPO = { href: 'https://github.com/patelvasukumar/SharedFolder', text: 'View the code on GitHub' };
+  var LI = { href: 'https://www.linkedin.com/in/vasukumar-patel/recent-activity/all/', text: 'View on LinkedIn' };
   var DATA = {
-    irish: {
-      meta: 'Group lead · Team project', title: 'Irish: AI Resume Agent',
-      desc: 'An AI-powered resume tailoring and job application agent, built so our group can apply for jobs faster.',
+    artcart: {
+      meta: 'Full-Stack Web Development', title: 'Paintings Portal (ArtCart)',
+      desc: 'A full-stack online store where users can browse and buy famous paintings.',
       points: [
-        'One code base for web, Android and iOS, with shared components that each platform can override.',
-        'All API links and the AI model choice live in one config file, so the model can be swapped easily.',
-        'Saves every generated resume locally and to Google Cloud, as DOCX, PDF or TXT, with a history view.'
+        'Browse paintings by style, such as Impressionism, Cubism and Romanticism, with each artist and price.',
+        'Sign up and log in securely; passwords are stored with secure hashing.',
+        'Cart with quantity changes, checkout with shipping and billing addresses, and a saved order history.',
+        'Database designed in Supabase (PostgreSQL) with tables for users, paintings, genres, orders and logins.',
+        'Reusable header, menu and footer parts keep the PHP code clean.'
       ],
-      tags: ['AI', 'Web', 'Android', 'iOS', 'Google Cloud'],
-      link: { href: 'https://github.com/patelvasukumar/Irish', text: 'View the code on GitHub' }
-    }
+      tags: ['PHP', 'PostgreSQL', 'Supabase', 'Replit'], link: REPO
+    },
+    records: {
+      meta: 'Databases & SQL', title: 'Student Records Management Database',
+      desc: "A database for a high school's student records.",
+      points: [
+        'Designed 13 tables in MySQL Workbench for students, parents, courses, grades, test results and activities.',
+        'Wrote SQL to create the tables, link them with keys and add rules that keep the data correct.',
+        'Added sample data, plus queries and views that pull out useful information.'
+      ],
+      tags: ['SQL', 'MySQL Workbench', 'Relational databases'], link: REPO
+    },
+    tax: {
+      meta: 'Programming · Java', title: 'Tax Filing Calculator',
+      desc: 'A Java console app that works out tax for one or more people.',
+      points: [
+        'Takes each person’s name, days worked per week and hourly pay.',
+        'Calculates monthly income, the tax on it and the income left after tax, then prints a summary.',
+        'Split into three classes (Person, TaxCalculation and TaxFilingDriver) to keep it organized.'
+      ],
+      tags: ['Java', 'OOP'], link: REPO
+    },
+    checksum: {
+      meta: 'Embedded Systems · Assembly Language', title: 'Digit Checksum Calculator',
+      desc: 'A checksum calculator in HCS12 assembly, running on the Dragon12-Plus microcontroller board.',
+      points: [
+        'Based on the Luhn algorithm, the method used to check credit card numbers.',
+        'Separate subroutines for odd and even digit sums, with the stack saving registers between steps.',
+        'Uses the IDIV instruction to split two-digit results into tens and ones.',
+        'Shows the result on the board’s 7-segment displays through a lookup table.'
+      ],
+      tags: ['Assembly', 'HCS12', 'Microcontrollers', 'Embedded systems'], link: REPO
+    },
+    bcd: {
+      meta: 'Embedded Systems · Assembly Language', title: 'BCD Counter & Secret Message Decryption',
+      desc: 'Two assembly programs for the HCS12 microcontroller on the Dragon12 board.',
+      points: [
+        'A BCD counter from 00 to 15 on the 7-segment displays, using DAA to keep the count in valid BCD.',
+        'Subroutines for the display and delay, planned with a flowchart before coding.',
+        'A decoder that divides each stored value by 3, adds 32 to get a readable character, and stores it in reverse.'
+      ],
+      tags: ['Assembly', 'HCS12', 'Microcontrollers'], link: REPO
+    },
+    linux: {
+      meta: 'Scripting · Linux & Bash', title: 'Linux User Management Scripts',
+      desc: 'Two Bash scripts that automate common Linux user administration tasks.',
+      points: [
+        'A menu-driven script to create and delete users, change groups, update the login shell and set expiry dates.',
+        'A second script that shows a user’s UID, GID, home directory, shell and home folder size.',
+        'Built and tested on Linux through WSL.'
+      ],
+      tags: ['Bash', 'Linux', 'WSL'], link: REPO
+    },
+    'post-remote': {
+      meta: 'LinkedIn post · 11.8K+ views', title: 'How to control your Windows laptop remotely, even when its lid is closed',
+      desc: 'During a heavy group assignment, my teammates gave up because they couldn’t balance it with their part-time jobs. I kept going. I left my laptop at home, plugged in and on Wi-Fi, set it to stay awake with the lid closed, and used Chrome Remote Desktop on my phone. On every break at work I connected and kept working, until the assignment was submitted before the deadline.',
+      sections: [
+        { title: 'Step 1: Change Windows power settings', items: ['Open Control Panel → Hardware and Sound → Power Options.', 'Select "Choose what closing the lid does".', 'Set "When I close the lid" to "Do nothing".'] },
+        { title: 'Step 2: Set up Chrome Remote Desktop', items: ['Set up remote access on your Windows laptop.', 'Install or open Chrome Remote Desktop on your phone and connect.'] },
+        { title: 'Step 3: Prepare your laptop', items: ['Connect it to Wi-Fi and keep it plugged in.', 'Place it somewhere safe and well ventilated, then close the lid.'] },
+        { title: 'Step 4: Connect from anywhere', items: ['Use your phone to control your Windows desktop while you are away.'] }
+      ],
+      quote: 'Sometimes the biggest challenge is not finding more time, but finding a smarter way to use the time you already have.',
+      tags: ['Windows', 'Chrome Remote Desktop', 'Productivity'], link: { href: 'https://www.linkedin.com/feed/update/urn:li:activity:7523473590399401984/', text: 'Open this post on LinkedIn' },
+      embed: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7523472796811948032'
+    },
   };
   var dlg = document.getElementById('dlg');
   var lastBtn = null;
@@ -662,14 +822,30 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     document.getElementById('dlgTitle').textContent = d.title;
     document.getElementById('dlgDesc').textContent = d.desc;
     var ul = document.getElementById('dlgList'); ul.textContent = '';
-    d.points.forEach(function (t) { var li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    (d.points || []).forEach(function (t) { var li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    ul.hidden = !(d.points && d.points.length);
+    var sec = document.getElementById('dlgSections'); sec.textContent = '';
+    (d.sections || []).forEach(function (s) {
+      var h = document.createElement('h4'); h.textContent = s.title; sec.appendChild(h);
+      var l = document.createElement('ul');
+      s.items.forEach(function (t) { var li = document.createElement('li'); li.textContent = t; l.appendChild(li); });
+      sec.appendChild(l);
+    });
+    var q = document.getElementById('dlgQuote'); q.textContent = d.quote || ''; q.hidden = !d.quote;
     var tg = document.getElementById('dlgTags'); tg.textContent = '';
-    d.tags.forEach(function (t) { var s = document.createElement('span'); s.textContent = t; tg.appendChild(s); });
+    (d.tags || []).forEach(function (t) { var s = document.createElement('span'); s.textContent = t; tg.appendChild(s); });
     var lk = document.getElementById('dlgLink'); lk.textContent = '';
     if (d.link) {
       var a = document.createElement('a'); a.className = 'btn'; a.href = d.link.href; a.textContent = d.link.text;
       lk.appendChild(a);
     }
+    var em = document.getElementById('dlgEmbed'); em.textContent = '';
+    if (d.embed) {
+      var f = document.createElement('iframe');
+      f.src = d.embed; f.title = 'Video: ' + d.title; f.setAttribute('allowfullscreen', '');
+      em.appendChild(f);
+    }
+    em.hidden = !d.embed;
   }
   projects.forEach(function (p) {
     p.addEventListener('click', function () {
@@ -681,7 +857,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   function closeDlg() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
   document.getElementById('dlgClose').addEventListener('click', closeDlg);
   dlg.addEventListener('click', function (e) { if (e.target === dlg) closeDlg(); });
-  dlg.addEventListener('close', function () { if (lastBtn) lastBtn.focus(); });
+  dlg.addEventListener('close', function () { var em = document.getElementById('dlgEmbed'); em.textContent = ''; em.hidden = true; if (lastBtn) lastBtn.focus(); });
 
   /* ---------- Copy email + toast ---------- */
   var toast = document.getElementById('toast'), toastTimer;
